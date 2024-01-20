@@ -16,3 +16,33 @@
 - HTTPs
 - Tree Shaking - remove unused code
 - Different dev and prod bundles
+
+
+# Namaste Food
+
+/**
+ * Header
+ * - Logo
+ * - Nav Item
+ * Body
+ * - Search
+ * - ReastaurantContainer
+ *   - RestaurantCard
+ *    - Img
+ *    - Name of Res, Star Rating, cuisines, delery time
+ * Footer
+ *  - Copyright
+ *  - Links
+ *  - Address
+ *  - Contract 
+ */
+
+TWO types of Export/Import
+
+- Default Export/Import
+  export default Component;
+  import Component from "path";
+
+- Name Export/Import
+   export const Component;
+   import {Component} from "path";
