@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurant] = useState([]);
@@ -13,14 +14,14 @@ const Body = () => {
   }, []);
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/api/seo/getListing?lat=26.89456660914799&lng=75.80515824669963"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=24.585445&lng=73.712479&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
     const json = await data.json();
 
 
-    setListOfRestaurant(json.data.success.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-    setFilteredRestaurant(json.data.success.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    setListOfRestaurant(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
+    setFilteredRestaurant(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
   };
 
   return listOfRestaurants.length == 0 ? (
@@ -52,9 +53,8 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            const filterList = listOfRestaurants.filter(
-              (res) => res.info.avgRatingString > 4
-            );
+            const filterList = listOfRestaurants.filter((res) => res.info.avgRatingString > 4);
+            console.log(filterList);
             setListOfRestaurant(filterList);
           }}
         >
@@ -63,10 +63,15 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link key={restaurant?.info?.id}
+            to={"/restaurants/"+ restaurant?.info?.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
   );
 };
 export default Body;  
+
