@@ -38,14 +38,16 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/grocery",
-        element: <Suspense><Grocery /></Suspense>
+        element: <Suspense>
+          <Grocery />
+        </Suspense>
       },
       {
         path: "/restaurants/:resId",
         element: <RestaurantMenu />
       }
     ],
-    errorElement: <Error/>
+    errorElement: <Error />
   },
 
 ]);
