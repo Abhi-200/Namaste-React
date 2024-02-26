@@ -55,3 +55,11 @@ TWO types of Export/Import
 # 2 types Routing in web apps
 - Client Side Routing
 - Server Side Routing  
+
+
+const categories = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+        (c) =>
+            c.card?.card?.["@type"] ==
+            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+    console.log(categories);

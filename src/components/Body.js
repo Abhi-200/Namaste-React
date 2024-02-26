@@ -1,14 +1,18 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, { withPromtedLabel } from "./RestaurantCard";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
+
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
 
   const [searchText, setSearchText] = useState("");
+
+  const RestaurantCardPromoted = withPromtedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -34,6 +38,8 @@ const Body = () => {
       </h1>
     );
 
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   return listOfRestaurants.length == 0 ? (
     <Shimmer />
   ) : (
@@ -41,7 +47,7 @@ const Body = () => {
       <div className="filter flex">
         <div className="search m-4 p-4">
           <input type="text"
-            className="border h-10 border-solid border-black rounded-lg"
+            className="border h-10 border-solid border-purple-200 rounded-lg"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
@@ -72,13 +78,23 @@ const Body = () => {
             Top Rated Restaurant
           </button>
         </div>
+        <div className="search flex items-center p-10">
+          <button >
+            <label>UserName : </label>
+            <input className="border border-black p-2" value={loggedInUser} onChange={(e) => setUserName(e.target.value)} />
+          </button>
+        </div>
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurant.map((restaurant) => (
-          <Link key={restaurant?.info?.id}
-            to={"/restaurants/" + restaurant?.info?.id}
+          <Link key={restaurant.info.id}
+            to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant.info.promoted ? (
+              <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>

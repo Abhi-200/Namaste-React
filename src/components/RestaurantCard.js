@@ -11,9 +11,9 @@ const RestaurantCard = (props) => {
   } = resData.info;
   const { deliveryTime } = resData.info.sla;
   return (
-    <div className="m-2 p-2 w-[250px] rounded-lg bg-gray-100 hover:bg-blue-300">
+    <div className="m-2 p-2 w-[300px] rounded-lg transition ease-in-out delay-90 hover:-translate-y-1 hover:scale-110 hover:duration-300">
       <img
-        className="rounded-lg w-[250px] h-[200px]"
+        className="rounded-lg w-[300px] h-[200px]"
         alt="res-logo"
         src={CDN_URL + cloudinaryImageId}
       />
@@ -24,6 +24,17 @@ const RestaurantCard = (props) => {
       <h4>{costForTwo}</h4>
     </div>
   );
+};
+
+export const withPromtedLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label>Promted</label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
 };
 
 export default RestaurantCard;
