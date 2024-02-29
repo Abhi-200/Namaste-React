@@ -56,10 +56,20 @@ TWO types of Export/Import
 - Client Side Routing
 - Server Side Routing  
 
+ # Type of Testing
+ - Unit Testing
+ - Integration Testing
+ - End to End Testing - e2e testing 
 
-const categories = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
-        (c) =>
-            c.card?.card?.["@type"] ==
-            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-    );
-    console.log(categories);
+# Setting up Testing in our app
+
+- Install React Testing Library
+- Installed jest
+- installed Babel depenencies
+- Configure Babel
+- Configure Parcel Config file to disable default babrl treanspilation
+- jest - npx jest --init
+- Install jsdom library
+- Install @babel/preset-react - to make JSX work in test cases
+- Include @babel/preset-react inside my babel config
+- install @testing-library/jest-dom
