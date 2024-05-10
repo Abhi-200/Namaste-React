@@ -85,7 +85,7 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-4">
         {filteredRestaurant.map((restaurant) => (
           <Link key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}

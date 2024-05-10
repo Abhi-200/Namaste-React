@@ -25,6 +25,7 @@ const RestaurantMenu = () => {
             <p className="font-bold text-lg">
                 {cuisines.join(", ")}
             </p>
+            
             {categories.map((category, index) => (
                 <RestaurantCategory
                     key={category?.card?.card?.title}
